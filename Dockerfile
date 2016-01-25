@@ -1,1 +1,1 @@
-FROM django:unbuild
+FROM django:onbuild
