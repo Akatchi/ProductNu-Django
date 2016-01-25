@@ -1,1 +1,8 @@
-Django=1.9.1
+Django==1.9.1
+mysqlclient
+djangorestframework
+markdown
+django-filter
+django-cors-headers
+celery
+django-celery

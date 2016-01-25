@@ -1,6 +1,40 @@
+rabbitmq:
+  image: tutum/rabbitmq
+  environment:
+    - RABBITMQ_PASS=mypass
+  ports:
+    - "5672:5672"  # we forward this port because it's useful for debugging
+    - "15672:15672"  # here, we can access rabbitmq management plugin
+
+redis:
+  image: redis:2.8.19
+
 development:
   build: .
   volumes:
     - .:/usr/src/app
   ports:
     - 8000:8000
+  links:
+    - db:db
+    - rabbitmq:rabbit
+    - redis:redis
+
+scraper:
+  build: scraper/
+  volumes:
+    - .:/usr/src/app/scraper
+  command: tail -f /dev/null
+  links:
+    - rabbitmq:rabbitmq
+    - redis:redis
+
+db:
+  image: mysql:5.7.7
+  volumes:
+    - /home/mysql:/var/lib/mysql
+  environment:
+    - MYSQL_DATABASE=productnu
+    - MYSQL_USER=productnu
+    - MYSQL_PASSWORD=superpassword
+    - MYSQL_ROOT_PASSWORD=superpassword
