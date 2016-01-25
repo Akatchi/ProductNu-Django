@@ -8,7 +8,6 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 627220E7 && \
 RUN easy_install pip
 
 RUN pip install requests==2.8.1
-RUN pip install celery[redis]==3.1.19
 
 COPY . /usr/src/app
 WORKDIR /usr/src/app/scraper

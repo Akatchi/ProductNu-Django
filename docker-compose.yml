@@ -11,14 +11,13 @@ redis:
 
 development:
   build: .
-  volumes:
-    - .:/usr/src/app
   ports:
     - 8000:8000
   links:
     - db:db
     - rabbitmq:rabbit
     - redis:redis
+  command: python manage.py runserver 0.0.0.0:8000
 
 scraper:
   build: scraper/
@@ -38,3 +37,12 @@ db:
     - MYSQL_USER=productnu
     - MYSQL_PASSWORD=superpassword
     - MYSQL_ROOT_PASSWORD=superpassword
+
+worker:
+  build: .
+  command: ./run_celery.sh
+  volumes:
+    - .:/app
+  links:
+    - db:db
+    - rabbitmq:rabbit

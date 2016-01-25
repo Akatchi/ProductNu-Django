@@ -6,3 +6,5 @@ django-filter
 django-cors-headers
 celery
 django-celery
+scrapy
+requests==2.9.1

@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'corsheaders',
     'djcelery',
+    'celeryapp',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -96,11 +97,9 @@ TEMPLATE_DIRS = (
 )
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    'DEFAULT_PERMISSION_CLASSES': (
+       'rest_framework.permissions.AllowAny',
+    ),
 }
 
 # cors
