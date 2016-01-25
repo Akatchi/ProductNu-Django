@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 
-from productnu_scraper.items import ProductnuScraperItem #FUK U
+from productnu_scraper.items import ProductnuScraperItem
 
 class LaptopshopSpider(scrapy.Spider):
     name = "laptopshop"
@@ -44,7 +44,6 @@ class LaptopshopSpider(scrapy.Spider):
         product_price = response.xpath('//div[contains(@class, "product-order")]/div[contains(@class, "product-order--information")]//div[@class="sales-price"]/strong[@class="sales-price--current"]/text()').extract()[0].strip()[:-1]
 
         #start building the product item
-        #wauw
         product = ProductnuScraperItem()
         product['name'] = product_title
         product['retailer_alias'] = 'coolblue'

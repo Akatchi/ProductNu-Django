@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from django.http import JsonResponse
+from rest_framework.views import APIView
+from celeryapp import tasks
 
-# Create your views here.
+
+class ScraperAPIView(APIView):
+    def get(self, request):
+        tasks.start_scraper.delay()
+        return JsonResponse({"scraper_started": True})
